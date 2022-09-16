@@ -140,12 +140,23 @@ class push_swap
 
             while (!empty($this->la)) {
                 $min = min($this->la);
-                $sorted = $this->la;
-                sort($sorted);
+
                 if (isset($this->la[1]) && $this->la[1] < $this->la[0]) {
                     $this->sa();
                 }
-                if ($this->la === $sorted) {
+
+                $i = 0;
+                $result = "";
+                while ($i < count($this->la) - 1) {
+                    if ($this->la[$i] < $this->la[$i + 1]) {
+                        $i++;
+                    } else {
+                        $result = "faux";
+                        $i++;
+                    }
+                }
+
+                if ($result == "") {
                     if (!empty($this->lb)) {
                         $this->pa();
                     } else {
@@ -169,19 +180,7 @@ class push_swap
     }
 }
 
-/* $test = new push_swap();
+$test = new push_swap();
 $test->tri();
-$test->vardu(); */
-
-array_shift($argv);
-$array = $argv;
-$test = 0;
-while($test < count($array) -1){
-    if($array[$test] < $array[$test+1]){
-        $test++;
-    }
-    else{
-        return;
-    }
-}
+$test->vardu();
 
