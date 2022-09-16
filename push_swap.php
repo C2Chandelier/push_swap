@@ -21,7 +21,7 @@ class push_swap
 
             $this->la[0] = $index1;
             $this->la[1] = $index0;
-            echo "sa ";
+            echo "sa";
         } else {
             return;
         }
@@ -35,7 +35,7 @@ class push_swap
 
             $this->lb[0] = $index1;
             $this->lb[1] = $index0;
-            echo "sb ";
+            echo "sb";
         } else {
             return;
         }
@@ -45,7 +45,7 @@ class push_swap
     {
         $this->sa();
         $this->sb();
-        echo "sc ";
+        echo "sc";
     }
 
     public function pa()
@@ -54,7 +54,7 @@ class push_swap
             $index0 = $this->lb[0];
             array_unshift($this->la, $index0);
             array_shift($this->lb);
-            echo "pa ";
+            echo "pa";
         } else {
             return;
         }
@@ -66,7 +66,7 @@ class push_swap
             $index0 = $this->la[0];
             array_unshift($this->lb, $index0);
             array_shift($this->la);
-            echo "pb ";
+            echo "pb";
         } else {
             return;
         }
@@ -78,7 +78,7 @@ class push_swap
             $index0 = $this->la[0];
             array_push($this->la, $index0);
             array_shift($this->la);
-            echo "ra ";
+            echo "ra";
         } else {
             return;
         }
@@ -90,7 +90,7 @@ class push_swap
             $index0 = $this->lb[0];
             array_push($this->lb, $index0);
             array_shift($this->lb);
-            echo "rb ";
+            echo "rb";
         } else {
             return;
         }
@@ -100,7 +100,7 @@ class push_swap
     {
         $this->ra();
         $this->rb();
-        echo "rr ";
+        echo "rr";
     }
 
     public function rra()
@@ -109,7 +109,7 @@ class push_swap
             $last = count($this->la) - 1;
             array_unshift($this->la, $this->la[$last]);
             array_pop($this->la);
-            echo "rra ";
+            echo "rra";
         } else {
             return;
         }
@@ -121,7 +121,7 @@ class push_swap
             $last = count($this->lb) - 1;
             array_unshift($this->lb, $this->lb[$last]);
             array_pop($this->lb);
-            echo "rrb ";
+            echo "rrb";
         } else {
             return;
         }
@@ -131,7 +131,7 @@ class push_swap
     {
         $this->rra();
         $this->rrb();
-        echo "rrr ";
+        echo "rrr";
     }
 
     public function tri()
@@ -139,16 +139,19 @@ class push_swap
         if (count($this->la) > 1) {
 
             while (!empty($this->la)) {
+                /* echo "la : " . implode(" ",$this->la) . PHP_EOL;
+                echo "lb : " . implode(" ",$this->lb) . PHP_EOL; */
                 $min = min($this->la);
 
                 if (isset($this->la[1]) && $this->la[1] < $this->la[0]) {
                     $this->sa();
+                    echo " ";
                 }
 
                 $i = 0;
                 $result = "";
                 while ($i < count($this->la) - 1) {
-                    if ($this->la[$i] < $this->la[$i + 1]) {
+                    if ($this->la[$i] <= $this->la[$i + 1]) {
                         $i++;
                     } else {
                         $result = "faux";
@@ -159,28 +162,28 @@ class push_swap
                 if ($result == "") {
                     if (!empty($this->lb)) {
                         $this->pa();
+                        if(count($this->lb) > 0){
+                            echo " ";
+                        }
                     } else {
                         return;
                     }
                 } else {
                     if ($min != $this->la[0]) {
                         $this->rra();
+                        echo " ";
                     } else {
                         $this->pb();
+                        echo " ";
                     }
                 }
             }
+        } else{
+            return;
         }
-    }
-
-    public function vardu()
-    {
-        var_dump($this->la);
-        var_dump($this->lb);
     }
 }
 
 $test = new push_swap();
 $test->tri();
-$test->vardu();
 
